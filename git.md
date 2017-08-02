@@ -47,6 +47,22 @@
 
 - 添加远程仓库
 - 利用SSHkey连接远程仓库
+ - 在添加远程库这步操作中运行下列命令时报错：
+``$ git remote add origin git@github.con:Hansoluo/learngit.git``
+``fatal: Could not read from remote repository``
+ - 上网寻找解决措施，过程记录如下：
+     1.  删除SSHkey重新添加，却仍报错
+     - 修改`.gitconfig`。这才发现配置信息不对
+     - 把用户名改成`github`上的用户名：`$ git config --global github.user Hansoluo`
+     - 重新连接`github`远程项目，报错`fatal:remote origin already exits.`
+     - 输入`$ git remote rm origin`重新连接远程仓库
+     - 执行`$ git push -u origin master`报错`failed to push some refs to..`
+     - 输入`$ git pull origin master`，把文件拉下来再push上去
+     - 关闭问题
+ - 原因可能有：
+     1.  配置信息和Github上不匹配
+     - SSHkey有两个，一个生成的，一个安装PC版自动生成的
+  - 这两个原因导致一直连接不上，后逐步修改才最终得于解决。
 
 ### 分支管理 ###
 
@@ -64,3 +80,8 @@
 ### 多人协作 ###
 
 ### 标签管理 ###
+
+
+### CHANGELOG ###
+----------
+2017/8/2 创建V1.0版本
